@@ -1,33 +1,26 @@
 
-import { Routes, Route } from "react-router-dom"
-import DashboardLayout from "./layout/DashboardLayout"
-import Overview from "./components/overview"
-import Projects from "./components/projects"
-import Profile from "./components/profile"
-import Header from "./containers/Header"
-import Footer from "./containers/Footer"
-import Sidebar from "./containers/Sidebar"
+import Signup from "./components/ui/form/sign-up";
+import { BrowserRouter,  Route, Navigate, Routes } from "react-router-dom";
+
+import Login from "./components/ui/form/login";
+import { Toaster } from "sonner";
+import FreelancerDashboard from "./components/FreelancerDashboard";
 
 
 function App() {
-
   return (
-    <>
-    <Header/>
-    <div className="flex flex-col">
-      <Sidebar/>
-      <DashboardLayout/>
+    <BrowserRouter >
+    <Toaster position="top-center" richColors/>
+    <div className="flex justify-center items-center  bg-[#f9fafb]">
+      <Routes>
+        <Route path="/" element={<Navigate to="/signup" replace />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/FreelancerDashboard" element={<FreelancerDashboard />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
     </div>
-    <Footer/>
+    </BrowserRouter>
 
-
-    {/* the routes */}
-    <Routes>
-      <Route path='/' element={<Overview/>}/>
-      <Route path="/projects" element={<Projects/>}/>
-      <Route path="/profile" element={<Profile/>}/>
-    </Routes>
-    </>
   )
 }
 
